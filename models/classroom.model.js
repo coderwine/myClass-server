@@ -1,7 +1,5 @@
-// const sequelize = require("../db");
-
 module.exports = (sequelize, DataTypes) => {
-    const Student = sequelize.define('classroom', {
+    const Classroom = sequelize.define('classroom', {
         
         class: {
             type: DataTypes.ENUM(
@@ -13,24 +11,19 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        numStudents: {
+            type: DataTypes.ARRAY(DataTypes.INTEGER),
+            defaultValue: null
+            // will want to populate as students are added.
         },
-        lastName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        badge: {
-            type: DataTypes.ENUM(
-                'White', 'Gold', 'Blue', 'Red'
-            ),
-            allowNull: false,  
-        },
-        notes: {
-            type: DataTypes.TEXT,
-            allowNull: true
+        id: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4,
+            validate: {
+                isUUID: 4
+            }
         }
     })
-    return Student;
+    return Classroom;
 }

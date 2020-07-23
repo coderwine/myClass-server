@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const Student = require('../db').import('../models/classroom.model')
+const Classroom = require('../db').import('../models/classroom.model')
 
 //* GET ALL
 router.get('/', (req, res) => {
-    Student.findAll()
+    Classroom.findAll()
         .then(data => res.status(200).json(data))
         .catch(err => res.status(500).json({
             error: err,
@@ -14,18 +14,15 @@ router.get('/', (req, res) => {
 //* POST
 router.put('/', (req, res) => {
     
-    const inputStudent = {
+    const inputClassroom = {
         class: req.body.class,
         cohort: req.body.cohort,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        badge: req.body.badge,
-        notes: req.body.notes
+        numStudents: req.body.numStudents
     }
     
-    Student.create(inputStudent)
+    Classroom.create(inputClassroom)
         .then(cohort => res.status(200).json(cohort))
-        // .then(cohort => res.status(200).json({student: cohort}))
+        // .then(cohort => res.status(200).json({Classroom: cohort}))
         .catch(err => res.status(500).json({ 
             error: err, 
             msg: 'PUT error'
@@ -36,7 +33,7 @@ router.put('/', (req, res) => {
 
 //* UPDATE :id
 router.put('/:id', (req, res) => {
-    Student.update(req.body, {
+    Classroom.update(req.body, {
         where: {
             id: req.params.id
         }
@@ -50,13 +47,13 @@ router.put('/:id', (req, res) => {
 
 //* DELETE :id
 router.delete('/:id', (req, res) => {
-    Student.destroy({
+    Classroom.destroy({
         where: {
             id: req.params.id
         }
     })
     .then(cohort => res.status(200).json({
-        student: cohort,
+        classroom: cohort,
         msg: 'Student Deleted!'
     }))
     .catch(err => res.status(500).json({
