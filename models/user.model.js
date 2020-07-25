@@ -23,13 +23,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             validate: {
                 notEmpty: true,
-                min: 8
-                // len: [8, 20]
+                // len: {
+                // args: [8,20],
+                //     msg: 'Password must be between 8-20 characters in length.'
+                // }
             }
         },
         role: {
             type: DataTypes.ENUM(
-                'Lead Instructor', 'Instructor', 'Learning Assistant', 'other...'
+                'Lead Instructor', 'Instructor', 'Learning Assistant', 'other...', 'Admin'
             ),
             allowNull: false,
         },

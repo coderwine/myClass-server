@@ -5,7 +5,8 @@ const app = express();
 
 //* CONTROLLERS 
 const classroom = require('./controllers/classroom.controller');
-const user = require('./controllers/user.controller')
+const user = require('./controllers/user.controller');
+const student = require('./controllers/student.controller');
 
 //* DB
 const sequelize = require('./db');
@@ -16,7 +17,8 @@ app.use(express.json());
 app.use(require('./middleware/headers'))
 
 //* ROUTES
-app.use('/', user) 
+app.use('/', user)
+app.use('/', student) 
 app.use(require('./middleware/validate-session'))
 app.use('/classroom', classroom);
 

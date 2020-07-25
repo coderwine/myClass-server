@@ -1,4 +1,4 @@
-module.exports (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Student = sequelize.define('student', {
 
         firstName: {
@@ -9,6 +9,15 @@ module.exports (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        studentEmail: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true,
+                notEmpty: true
+            }
+        },
         badge: {
             type: DataTypes.ENUM(
                 'White', 'Gold', 'Blue', 'Red'
@@ -18,11 +27,12 @@ module.exports (sequelize, DataTypes) => {
         alumn: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
-            allowNull: false,  
+            // allowNull: false,  
         },
         id: {
-            type: DataTypes.UUIDV4,
-            primeKey: true,
+            type: DataTypes.UUID,
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4,
             validate: {
                 isUUID: 4
             }

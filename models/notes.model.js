@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         id: {
             type: DataTypes.UUIDV4,
-            primeKey: true,
+            primaryKey: true,
             validate: {
                 isUUID: 4
             }
